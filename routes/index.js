@@ -18,13 +18,14 @@ router.get('/api/questions', function (req, res) {
   });
 });
 
-router.get('/api/question/:id', function (req, res) {
+router.get('/api/questions/:id', function (req, res) {
   service.getSingleQuestion(req, function (results) {
     res.json(results)
   });
 });
 
-router.post('/api/question', function (req, res) {
+router.post('/api/questions', function (req, res) {
+  console.log('POST toimii')
   service.createQuestion(req, function () {
     res.status(201)
       .end();
@@ -33,7 +34,7 @@ router.post('/api/question', function (req, res) {
 
 //PUT tähän jos ehtii
 
-router.delete('/api/question/:id', function (req, res) {
+router.delete('/api/questions/:id', function (req, res) {
   service.deleteQuestion(req, res, function () {
   })
 });

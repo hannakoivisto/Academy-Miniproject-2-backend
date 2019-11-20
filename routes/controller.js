@@ -31,8 +31,10 @@ function getSingleQuestion(req, callback) {
 function createQuestion(req, callback) {
     pool.connect((err, client) => {
         if (err) throw err;
-        client.query('INSERT INTO question (title, topic, optionA, optionB, username) VALUES ($1, $2, $3, $4, $5)'
-        [req.body.title, req.body.topic, req.body.optionA, req.body.optionB, req.body.username], (err, data) => {
+        // let date = Date(Date.now())
+        // console.log(date);
+        client.query('INSERT INTO question (title, topic, optiona, optionb, username) VALUES ($1, $2, $3, $4, $5)',
+        [req.body.title, req.body.topic, req.body.optiona, req.body.optionb, req.body.username], (err, data) => {
             if (err) throw err;
             client.release();
             callback();
