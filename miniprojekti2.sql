@@ -9,7 +9,6 @@ CREATE TABLE question (
 
 CREATE TABLE comment (
     id serial primary key,
-    dateadd timestamp NOT NULL,
     comment character varying(1000),
     username character varying(40),
     question_id integer
