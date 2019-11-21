@@ -27,4 +27,3 @@ ALTER TABLE comment
 ALTER TABLE vote
     ADD CONSTRAINT fk_vote_id FOREIGN KEY (question_id) REFERENCES question (id);
 
-
