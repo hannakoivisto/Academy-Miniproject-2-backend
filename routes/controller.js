@@ -136,6 +136,8 @@ function deleteComment(req, res, callback) {
     });
 }
 
+//Votes-osio alkaa tästä:
+
 function getAllVotes(callback) {
     // haetaan yhteys altaasta
     pool.connect((err, client) => {
