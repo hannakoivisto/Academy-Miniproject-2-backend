@@ -78,6 +78,8 @@ router.delete('/api/comments/:id', function (req, res) {
   })
 });
 
+//Votes-osio alkaa tästä:
+
 router.get('/api/votes', function (req, res) {
   console.log('/api/votes toimii');
   service.getAllVotes(function (results) {
