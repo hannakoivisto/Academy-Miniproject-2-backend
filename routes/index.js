@@ -78,4 +78,25 @@ router.delete('/api/comments/:id', function (req, res) {
   })
 });
 
+router.get('/api/votes', function (req, res) {
+  console.log('/api/votes toimii');
+  service.getAllVotes(function (results) {
+    res.json(results);
+  });
+});
+
+router.get('/api/votes/:id', function (req, res) {
+  service.getVoteCount(req, function (results) {
+    res.json(results)
+  });
+});
+
+router.post('/api/votes', function (req, res) {
+  console.log('POST toimii')
+  service.createVote(req, function () {
+    res.status(201)
+      .end();
+  });
+});
+
 module.exports = router;

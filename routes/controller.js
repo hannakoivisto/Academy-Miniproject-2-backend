@@ -99,8 +99,6 @@ function getSingleComment(req, callback) {
 function createComment(req, callback) {
     pool.connect((err, client) => {
         if (err) throw err;
-        // let date = Date(Date.now())
-        // console.log(date);
         client.query('INSERT INTO comment (comment, username) VALUES ($1, $2)',
             [req.body.comment, req.body.username], (err, data) => {
                 if (err) throw err;
@@ -138,4 +136,40 @@ function deleteComment(req, res, callback) {
     });
 }
 
-module.exports = { getAllQuestions, getSingleQuestion, createQuestion, updateQuestion, deleteQuestion, getAllComments, getSingleComment, createComment, updateComment, deleteComment };
+function getAllVotes(callback) {
+    // haetaan yhteys altaasta
+    pool.connect((err, client) => {
+        if (err) throw err;
+        // luodaan kysely
+        client.query('SELECT * FROM vote', (err, data) => {
+            if (err) throw err;
+            client.release();
+            callback(data.rows);
+        });
+    });
+}
+
+function getVoteCount(req, callback) {
+    pool.connect((err, client) => {
+        if (err) throw err;
+        client.query('select * from vote where id = $1', [req.params.id], (err, data) => {
+            if (err) throw err;
+            client.release();
+            callback(data.rows);
+        });
+    });
+}
+
+function createVote(req, callback) {
+    pool.connect((err, client) => {
+        if (err) throw err;
+        client.query('INSERT INTO vote (optionacounter, optionbcounter) VALUES ($1, $2)',
+            [req.body.optiona, req.body.optionb], (err, data) => {
+                if (err) throw err;
+                client.release();
+                callback();
+            });
+    });
+}
+
+module.exports = { getAllQuestions, getSingleQuestion, createQuestion, updateQuestion, deleteQuestion, getAllComments, getSingleComment, createComment, updateComment, deleteComment, getAllVotes, getVoteCount, createVote };
